@@ -59,6 +59,7 @@
   --background-color: #222b40;
   --color-text-light: #4f5969;
   --color-heading: #1a202c;
+  --color-footer: #f6f6f6;
   --color-heading-black: black;
   --color-accent: #d1dce5;
 }
@@ -241,7 +242,9 @@ a:focus {
 }
 
 /* Custom classes */
-
+.main-footer{
+  color: var(--color-footer)
+}
 .post-list-item:hover{
   background-color: #4f5969;
 }
