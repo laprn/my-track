@@ -14,7 +14,7 @@ const Layout = ({ location, title, children }) => {
   
   footer = (
     <h3 className="main-footer">
-      <Link to="/">{title}</Link>
+      <Link to="/">Home</Link>
     </h3>
   )
   return (
