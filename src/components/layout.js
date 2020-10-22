@@ -13,11 +13,7 @@ const Layout = ({ location, title, children }) => {
   )
   if (isRootPath){
     header = (
-      <StyledBackgroundSection title={title} className="global-header">
-        {/* <h1 className="top-heading">
-          <Link to="/">{title}</Link>
-        </h1> */}
-      </StyledBackgroundSection>
+      <StyledBackgroundSection title={title} className="global-header"/>
     )
 
     return (
@@ -29,32 +25,6 @@ const Layout = ({ location, title, children }) => {
         </div>
       </div>
     )
-    
-    // header = (
-    //     <h1
-    //       style={{
-    //         ...scale(1.3),
-    //         position: 'absolute',
-    //         textAlign: 'center',
-    //         left: 0,
-    //         right: 0,
-    //         top: rhythm(4),
-    //         marginTop: '0',
-    //         height: rhythm(2.5),
-    //       }}
-    //     >
-    //       <Link
-    //         style={{
-    //           boxShadow: 'none',
-    //           textDecoration: 'none',
-    //           color: 'inherit',
-    //         }}
-    //         to={'/'}
-    //       >
-    //         {title}
-    //       </Link>
-    //     </h1>
-    // )
   }
   else{
     header = (
@@ -71,17 +41,6 @@ const Layout = ({ location, title, children }) => {
         </div>
     )
   }
-
-  
-  // return (
-  //   <div className="content-wrapper" data-is-root-path={isRootPath}>
-  //     <header className="global-header">{header}</header>
-  //     <div className="global-wrapper">
-  //       <main>{children}</main>
-  //       <footer>{footer}</footer>
-  //     </div>
-  //   </div>
-  // )
 }
 
 export default Layout
