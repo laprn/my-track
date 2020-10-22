@@ -105,7 +105,7 @@ h4,
 h5,
 h6 {
   font-family: var(--font-heading);
-  margin-top: var(--spacing-12);
+  margin-top: var(--spacing-0);
   margin-bottom: var(--spacing-6);
   line-height: var(--lineHeight-tight);
   letter-spacing: -0.025em;
@@ -117,13 +117,14 @@ h4,
 h5,
 h6 {
   font-weight: var(--fontWeight-bold);
-  color: var(--color-heading);
+  color: var(--color-text);
 }
 
 h1 {
   font-weight: var(--fontWeight-semibold);
-  font-size: var(--fontSize-6);
+  font-size: var(--fontSize-7);
   color: var(--color-text);
+  /* text-align: center; */
 }
 
 h2 {
@@ -266,7 +267,7 @@ a:focus {
 .global-wrapper {
   margin: var(--spacing-0) auto;
   max-width: var(--maxWidth-wrapper);
-  padding: var(--spacing-10) var(--spacing-5);
+  padding: var(--spacing-5) var(--spacing-10) var(--spacing-5) var(--spacing-10);
 }
 
 .global-wrapper[data-is-root-path="true"] .bio {
@@ -274,10 +275,13 @@ a:focus {
 }
 
 .global-header {
-  margin-bottom: var(--spacing-12);
+  margin-bottom: var(--spacing-0);
+}
+.main-image{
+  height: 300px;
 }
 
-.main-heading {
+.top-heading {
   font-size: var(--fontSize-7);
   margin: 0;
 }
@@ -293,7 +297,7 @@ a:focus {
 
 .post-list-item h2 {
   font-size: var(--fontSize-4);
-  color: var(--color-primary);
+  color: var(--color-text);
   margin-bottom: var(--spacing-2);
   margin-top: var(--spacing-0);
 }
@@ -326,7 +330,7 @@ a:focus {
 }
 
 .blog-post header h1 {
-  margin: var(--spacing-0) var(--spacing-0) var(--spacing-4) var(--spacing-0);
+  margin: var(--spacing-0) var(--spacing-0) var(--spacing-0) var(--spacing-0);
 }
 
 .blog-post header p {
