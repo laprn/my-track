@@ -244,7 +244,8 @@ a:focus {
 
 /* Custom classes */
 .main-footer{
-  color: var(--color-footer)
+  color: var(--color-footer);
+  padding: 10px;
 }
 .post-list-item:hover{
   background-color: #4f5969;
