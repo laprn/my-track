@@ -1,13 +1,15 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Post from "../components/post"
 
-const BlogIndex = ({ data, location }) => {
+import Post from "./components/post"
+import Pagination from "./components/pagination"
+
+const BlogIndex = ({ data, location, props }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.edges
+  const posts = props.data.allMarkdownRemark.edges
   const Posts = posts.map(({node}) => (
     <Post
       slug = {node.fields.slug}
@@ -15,13 +17,15 @@ const BlogIndex = ({ data, location }) => {
       date = {node.frontmatter.date}
       excerpt = {node.excerpt}
     />
-  ))  
+  ))
+
   return (
     <Layout location={location} title={siteTitle}>
       <SEO title="All posts" />
       <ol style={{ listStyle: `none` }}>
       {Posts}
       </ol>
+      <Pagination props={props} />
     </Layout>
   )
 }
@@ -36,7 +40,7 @@ export const pageQuery = graphql`
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges{
+      edges {
         node {
           excerpt
           fields {
