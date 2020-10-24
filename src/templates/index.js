@@ -1,15 +1,15 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import Post from "./components/post"
-import Pagination from "./components/pagination"
+import Post from "../components/post"
+import Pagination from "../components/pagination"
 
-const BlogIndex = ({ data, location, props }) => {
+const BlogIndex = ({ data, location, pageContext }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = props.data.allMarkdownRemark.edges
+  const posts = data.allMarkdownRemark.edges
   const Posts = posts.map(({node}) => (
     <Post
       slug = {node.fields.slug}
@@ -20,12 +20,12 @@ const BlogIndex = ({ data, location, props }) => {
   ))
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout location={location} title={siteTitle} >
       <SEO title="All posts" />
       <ol style={{ listStyle: `none` }}>
       {Posts}
       </ol>
-      <Pagination props={props} />
+      <Pagination context={pageContext} />
     </Layout>
   )
 }
@@ -33,16 +33,20 @@ const BlogIndex = ({ data, location, props }) => {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query {
+  query MyQuery($skip: Int!, $limit: Int!) {
     site {
       siteMetadata {
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC},
+      limit: $limit,
+      skip: $skip
+      ) {
       edges {
         node {
-          excerpt(format: MARKDOWN)
+          excerpt
           fields {
             slug
           }

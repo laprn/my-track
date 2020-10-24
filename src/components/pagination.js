@@ -1,15 +1,33 @@
 import { Link } from "gatsby"
 import React from "react"
 
-const Pagination = ({ props }) => {
-	const { pageContext } = props;
-	const { previousPagePath, nextPagePath } = pageContext;
+const Pagination = ({ context }) => {
+	// const { pageNumber } = props;
+	const { previousPagePath, nextPagePath } = context;
 
 	return (
-		<div className={styles.pagination}>
-			{previousPagePath ? <Link to={previousPagePath}>前のページ</Link> : null }
-			{nextPagePath ? <Link to={nextPagePath}>次のページ</Link> : null }
-		</div>
+		<nav className="blog-post-nav">
+        <ul
+          style={{
+            display: `flex`,
+            flexWrap: `wrap`,
+            justifyContent: `space-between`,
+            listStyle: `none`,
+            padding: 0,
+          }}
+        >
+          <li>
+          {previousPagePath ? <Link to={previousPagePath}>{'<'} Next</Link> : null }
+          </li>
+          <li>
+		{nextPagePath ? <Link to={nextPagePath}>Previous {'>'}</Link> : null }
+          </li>
+        </ul>
+      </nav>
+		// <div className="pagination">
+		// 	{previousPagePath ? <Link to={previousPagePath}>← Next</Link> : null }
+		// 	{nextPagePath ? <Link to={nextPagePath}>Previous →</Link> : null }
+		// </div>
 	)
 }
 
