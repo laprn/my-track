@@ -23,6 +23,16 @@ module.exports = {
       },
     },
     {
+      resolve: 'gatsby-source-microcms',
+      options: {
+        apiKey: '9ed5f06c-ca53-47b9-858d-23011966d6d0',
+        serviceId: 'laprn',
+        apis: [{
+          endpoint: 'blog',
+        }],
+      },
+    },
+    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [

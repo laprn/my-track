@@ -10,17 +10,31 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const template = path.resolve(`./src/templates/index.js`)
   // Get all markdown blog posts sorted by date
   const result = await graphql(
+    // `
+    //   {
+    //     allMarkdownRemark(
+    //       sort: { fields: [frontmatter___date], order: ASC,  }
+    //     ) {
+    //       edges{
+    //         node {
+    //           fields {
+    //             slug
+    //           }
+    //           id
+    //         }
+    //       }
+    //     }
+    //   }
+    // `
     `
       {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC,  }
-        ) {
-          edges{
+        allMicrocmsBlog(sort: { fields: [date], order: ASC }) {
+          edges {
             node {
-              fields {
-                slug
-              }
-              id
+              blogId
+              title
+              date
+              content
             }
           }
         }
@@ -36,7 +50,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allMarkdownRemark.edges
+  const posts = result.data.allMicrocmsBlog.edges
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -50,13 +64,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
 
     posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].node.id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].node.id
+      const previousPostId = index === 0 ? null : posts[index - 1].node.blogId
+      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].node.blogId
+      // console.log(post.node.blogId)
       createPage({
-        path: post.node.fields.slug,
+        path: post.node.blogId,
         component: blogPost,
         context: {
-          id: post.node.id,
+          id: post.node.blogId,
           previousPostId,
           nextPostId,
         },

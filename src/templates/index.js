@@ -9,13 +9,13 @@ import Pagination from "../components/pagination"
 
 const BlogIndex = ({ data, location, pageContext }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.edges
+  const posts = data.allMicrocmsBlog.edges
   const Posts = posts.map(({node}) => (
     <Post
-      slug = {node.fields.slug}
-      title = {node.frontmatter.title}
-      date = {node.frontmatter.date}
-      excerpt = {node.excerpt}
+      slug = {node.blogId}
+      title = {node.title}
+      date = {node.date}
+      excerpt = {node.description}
     />
   ))
 
@@ -39,22 +39,18 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(
-      sort: { fields: [frontmatter___date], order: DESC},
+    allMicrocmsBlog(
+      sort: { fields: date, order: DESC},
       limit: $limit,
       skip: $skip
       ) {
       edges {
         node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
-          }
+          blogId
+          title
+          date(formatString: "MMMM DD, YYYY")
+          content
+          description
         }
       }
     }
