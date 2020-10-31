@@ -12,7 +12,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
   const posts = data.allMicrocmsBlog.edges
   const Posts = posts.map(({node}) => (
     <Post
-      slug = {node.blogId}
+      blogId = {node.blogId}
       title = {node.title}
       date = {node.date}
       excerpt = {node.description}
@@ -22,7 +22,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
   return (
     <Layout location={location} title={siteTitle} >
       <SEO title="All posts" />
-      <ol style={{ listStyle: `none` }}>
+      <ol style={{ listStyle: `none`}}>
       {Posts}
       </ol>
       <Pagination context={pageContext} />

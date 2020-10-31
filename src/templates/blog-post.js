@@ -3,11 +3,13 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import marked from "marked"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.microcmsBlog
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
+  const html = marked(post.content)
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
@@ -26,7 +28,7 @@ const BlogPostTemplate = ({ data, location }) => {
         
         <section
           
-          dangerouslySetInnerHTML={{ __html: post.content }}
+          dangerouslySetInnerHTML={{ __html: html }}
           itemProp="articleBody"
         />
         <hr />
