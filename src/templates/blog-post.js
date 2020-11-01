@@ -3,16 +3,18 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import marked from "marked"
 
 const BlogPostTemplate = ({ data, location }) => {
-  const post = data.markdownRemark
+  const post = data.microcmsBlog
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
+  const html = marked(post.content)
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
-        title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        title={post.title}
+        // description={post.frontmatter.description || post.excerpt}
       />
       <article
         className="blog-post"
@@ -20,11 +22,13 @@ const BlogPostTemplate = ({ data, location }) => {
         itemType="http://schema.org/Article"
       >
         <header>
-          <h2 itemProp="headline">{post.frontmatter.title}</h2>
-          <p>{post.frontmatter.date}</p>
+          <h2 itemProp="headline">{post.title}</h2>
+          <p>{post.date}</p>
         </header>
+        
         <section
-          dangerouslySetInnerHTML={{ __html: post.html }}
+          
+          dangerouslySetInnerHTML={{ __html: html }}
           itemProp="articleBody"
         />
         <hr />
@@ -43,15 +47,15 @@ const BlogPostTemplate = ({ data, location }) => {
         >
           <li>
           {next && (
-              <Link to={next.fields.slug} rel="next">
-                {'<'} {next.frontmatter.title}
+              <Link to={`/${next.blogId}`} rel="next">
+                {'<'} {next.title}
               </Link>
             )}
           </li>
           <li>
           {previous && (
-              <Link to={previous.fields.slug} rel="prev">
-                 {previous.frontmatter.title} {'>'}
+              <Link to={`/${previous.blogId}`} rel="prev">
+                 {previous.title} {'>'}
               </Link>
             )}
           </li>
@@ -74,31 +78,19 @@ export const pageQuery = graphql`
         title
       }
     }
-    markdownRemark(id: { eq: $id }) {
-      id
-      excerpt(pruneLength: 160)
-      html
-      frontmatter {
-        title
-        date(formatString: "MMMM DD, YYYY")
-        description
-      }
+    microcmsBlog(blogId: { eq: $id }) {
+      blogId
+      title
+      date(formatString: "DD MMMM, YYYY")
+      content
     }
-    previous: markdownRemark(id: { eq: $previousPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-      }
+    previous: microcmsBlog(blogId: { eq: $previousPostId }) {
+      blogId
+      title
     }
-    next: markdownRemark(id: { eq: $nextPostId }) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-      }
+    next: microcmsBlog(blogId: { eq: $nextPostId }) {
+      blogId
+      title
     }
   }
 `
