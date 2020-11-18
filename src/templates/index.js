@@ -7,6 +7,8 @@ import SEO from "../components/seo"
 import Post from "../components/post"
 import Pagination from "../components/pagination"
 
+import "typeface-open-sans"
+
 const BlogIndex = ({ data, location, pageContext }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMicrocmsBlog.edges
