@@ -24,6 +24,7 @@ const BlogIndex = ({ data, location, pageContext }) => {
   return (
     <Layout location={location} title={siteTitle} >
       <SEO title="All posts" />
+      <Pagination context={pageContext} />
       <ol style={{ listStyle: `none`}}>
       {Posts}
       </ol>
