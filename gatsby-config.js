@@ -53,8 +53,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `qrn.la`,
+        short_name: `qrn.la`,
         start_url: `/`,
         background_color: `#222b40`,
         theme_color: `#222B40`,
