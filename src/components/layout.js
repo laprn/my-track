@@ -12,14 +12,21 @@ const Layout = ({ location, title, children }) => {
     </h3>
   )
   if (isMainPath != null){
+    // header = (
+    //   <StyledBackgroundSection title={title} className="global-header"/>
+    // )
     header = (
-      <StyledBackgroundSection title={title} className="global-header"/>
+      <h1 className="main-heading">
+        <Link to="/">{title}</Link>
+      </h1>
     )
-
     return (
       <div className="content-wrapper" data-is-root-path={isMainPath}>
-        <header className="global-header main-image">{header}</header>
+        {/* <header className="global-header main-image">{header}</header> */}
+
         <div className="global-wrapper">
+        <header className="global-header" data-is-root-path={isMainPath}>{header}</header>
+
           <main>{children}</main>
           <footer>{footer}</footer>
         </div>
