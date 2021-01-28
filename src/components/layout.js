@@ -1,6 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
-import StyledBackgroundSection from "./StyledBackgroundSection.js"
+import Search from "./search"
+const searchIndices = [{ name: `Pages`, title: `Pages` }]
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
@@ -26,7 +27,7 @@ const Layout = ({ location, title, children }) => {
 
         <div className="global-wrapper">
         <header className="global-header" data-is-root-path={isMainPath}>{header}</header>
-
+          <Search indices={searchIndices} />
           <main>{children}</main>
           <footer>{footer}</footer>
         </div>
